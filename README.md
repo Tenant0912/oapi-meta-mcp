@@ -17,11 +17,12 @@ author thought of. On ten held-out Invoice Ninja tasks, run with real Claude Cod
 | Server | Correct | Input tokens, all 10 tasks |
 |---|---|---|
 | Generator, 379 tools | 9/10 (+1 partial) | 10.2M |
-| **oapi-meta-mcp, 3 tools** | **8/10 (+1 partial)** | **1.63M** |
+| **oapi-meta-mcp, 3 tools, generic** | **8/10 (+1 partial)** | **1.63M** |
+| NightSquawk, 3 tools over a curated Invoice Ninja catalogue | 10/10 | 1.61M |
 | Best community server, 37 tools | 2/10 (+5 partial) | 1.53M |
 | Hand-written, 6 tools | 0/10 | 0.55M |
 
-Write-up and per-run data: https://tenant0912.github.io/notes/invoiceninja-oapi-meta.html
+Curating per API beats the raw spec: this repo is the generic starting point. Write-up and per-run data: https://tenant0912.github.io/notes/invoiceninja-oapi-meta.html
 
 ## Prior art
 
