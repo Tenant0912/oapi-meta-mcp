@@ -10,6 +10,8 @@ import YAML from "yaml";
 const OPENAPI_PATH = process.env.OPENAPI_PATH;
 if (!OPENAPI_PATH) { console.error("OPENAPI_PATH is required"); process.exit(1); }
 const MAX_CHARS = Number(process.env.MAX_CHARS) || 20000;
+const READ_ONLY = /^(1|true|yes)$/i.test(process.env.READ_ONLY || "");
+const isWrite = (m) => !["GET", "HEAD", "OPTIONS"].includes(m);
 let EXTRA = {};
 try { EXTRA = JSON.parse(process.env.EXTRA_HEADERS || "{}"); } catch { console.error("EXTRA_HEADERS is not valid JSON"); process.exit(1); }
 
@@ -90,7 +92,7 @@ server.registerTool("search_operations", {
   }
   scored.sort((a, b) => b[0] - a[0] || a[1].path.length - b[1].path.length);
   if (!scored.length) return text("No matches. Try fewer or different keywords.");
-  return text(scored.slice(0, limit).map(([, o]) => `${o.id} | ${o.method} ${o.path} | ${clip(o.op.summary || o.op.description, 100)}`).join("\n"));
+  return text(scored.slice(0, limit).map(([, o]) => `${o.id} | ${o.method} ${o.path}${isWrite(o.method) ? " [write]" : ""} | ${clip(o.op.summary || o.op.description, 100)}`).join("\n"));
 });
 
 server.registerTool("describe_operation", {
@@ -137,6 +139,7 @@ server.registerTool("call_operation", {
   const o = ops.get(operationId);
   if (!o) return err(`Unknown operationId '${operationId}'. Use search_operations.`);
   if (!BASE) return err("BASE_URL is not configured.");
+  if (READ_ONLY && isWrite(o.method)) return err(`This server is read-only (READ_ONLY=1); ${o.method} ${o.path} is a write.`);
   let path = o.path;
   for (const [k, v] of Object.entries(path_params || {})) path = path.replace(`{${k}}`, encodeURIComponent(String(v)));
   const missing = path.match(/\{[^}]+\}/g);

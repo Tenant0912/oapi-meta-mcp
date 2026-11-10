@@ -1,6 +1,6 @@
 {
   "name": "oapi-meta-mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Any OpenAPI spec as a 3-tool MCP server: full API coverage, ~400-token tool list",
   "type": "module",
   "bin": { "oapi-meta-mcp": "server.mjs" },

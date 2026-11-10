@@ -38,7 +38,9 @@ OPENAPI_PATH=./openapi.yaml BASE_URL=https://api.example.com \
 EXTRA_HEADERS='{"Authorization":"Bearer YOUR_KEY"}' node server.mjs
 ```
 
-Env: `OPENAPI_PATH` (YAML or JSON), `BASE_URL`, `EXTRA_HEADERS` (JSON object of headers), `MAX_CHARS` (response cap, default 20000).
+Env: `OPENAPI_PATH` (YAML or JSON), `BASE_URL`, `EXTRA_HEADERS` (JSON object of headers), `MAX_CHARS` (response cap, default 20000), `READ_ONLY=1` (refuse every non-GET call; write operations are marked `[write]` in search results).
+
+The benchmark above was run on 0.1.0, which had no write markers or read-only mode.
 
 Limits: JSON request bodies only (no multipart); auth only via fixed headers; `describe_operation` truncates very long schemas.
 
