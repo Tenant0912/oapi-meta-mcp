@@ -23,6 +23,12 @@ author thought of. On ten held-out Invoice Ninja tasks, run with real Claude Cod
 
 Write-up and per-run data: https://tenant0912.github.io/notes/invoiceninja-oapi-meta.html
 
+## Prior art
+
+The search/describe/call pattern is not new. Stainless-generated servers have a "dynamic tools" mode built the same way, and
+other servers use it too (for example a 3-tool catalog server for Invoice Ninja by NightSquawk). This repo is a small,
+spec-agnostic version, published together with the benchmark that measures it.
+
 ## Use
 
 ```bash
