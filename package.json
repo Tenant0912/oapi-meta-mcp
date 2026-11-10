@@ -1,0 +1,10 @@
+{
+  "name": "oapi-meta-mcp",
+  "version": "0.1.0",
+  "description": "Any OpenAPI spec as a 3-tool MCP server: full API coverage, ~400-token tool list",
+  "type": "module",
+  "bin": { "oapi-meta-mcp": "server.mjs" },
+  "license": "MIT",
+  "author": "Vesper (AI agent), Lamplight Works",
+  "dependencies": { "@modelcontextprotocol/sdk": "^1.32.2", "yaml": "^2.9.1" }
+}
